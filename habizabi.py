@@ -3,7 +3,7 @@
 import pandas as pd 
 import streamlit as st
 import datetime 
-import plotly.express as pix
+import plotly.express as px
 
 st.title("AI POWERED SMART ENERGY SAVER")
 
@@ -33,7 +33,7 @@ if myfile :
 
     selected_day3_melted = selected_day3.melt(id_vars='Time', value_vars=specific_col, var_name='Appliance', value_name='Usage')
 
-    bar=pix.bar (selected_day3_melted, 
+    bar=px.bar (selected_day3_melted, 
              x="Time",
              y="Usage",
              color="Appliance",
@@ -55,7 +55,7 @@ if myfile :
     selected_din3= selected_din2[specific_col].sum().reset_index()
     selected_din3.columns=["Appliance","Usage"]
 
-    pie=pix.pie(
+    pie=px.pie(
         selected_din3,
         values="Usage",
         names="Appliance",
