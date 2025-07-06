@@ -22,7 +22,7 @@ if myfile :
 
 ## the bar chart portion 
 
-    st.subheader("📊 Stacked Bar Chart: Appliance Usage by Hour") 
+    st.subheader("Stacked Bar Chart: Appliance Usage by Hour") 
     week_day = df['Day'].unique().tolist() #it creats a list of days to be used in the dropdown 
 
     selected_day= st.selectbox("Select the day for bar chart",week_day,index=week_day.index(today) if today in week_day else 0 ) #basically a dropdown box user can select a specific day by default itll show today's day
@@ -64,6 +64,15 @@ if myfile :
     )
     pie.update_layout(title_x=0.5)
     st.plotly_chart(pie,use_container_width=True)
+
+    # a daily total consumption line chart 
+    st.subheader("LINE CHART FOR THE WHOLE WEEK!!") 
+
+    daily_total= df.groupby("Day")["Total Consumption (kWh)"].sum().reset_index()
+
+    line=px.line(daily_total,x="Day",y="Total Consumption (kWh)",title="Total Daily Energy Consumption")
+    st.plotly_chart(line,use_container_width=True)
+
 
 
 
